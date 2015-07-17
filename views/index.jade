@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  form(ng-submit="searchForecast(state, city)")
+    input.form-control(placeholder="City", ng-model="city")
+    input.form-control(placeholder="State", ng-model="state")
+    button Search 
