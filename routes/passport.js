@@ -4,10 +4,6 @@ module.exports = function(app, passport) {
     res.render('index');
   });
 
-  app.get('/', function(req, res, next) {
-    res.render('index');
-  });
-
   app.get('/login', function(req, res) {
     res.render('layout');
   });

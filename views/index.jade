@@ -1,4 +1,16 @@
-form(ng-submit="searchForecast(state, city)")
-  input.form-control(placeholder="City", ng-model="city")
-  input.form-control(placeholder="State", ng-model="state")
-  button Search 
+.row
+  form(ng-submit="searchForecast(state, city)")
+    input.form-control(placeholder="City", ng-model="city")
+    input.form-control(placeholder="State", ng-model="state")
+    button Search 
+.col-md-4(ng-repeat="location in locations")
+  .city.row.text-center
+  .monthDay.row.text-center
+  .cond.row.text-center
+  .currentTemp.row.text-center
+  .forecast.row
+    .row.days(ng-repeat="day in forecast")
+      .day.col-xs-4
+      .icon.col-xs-4
+      .tHigh.col-xs-2
+      .tLow.col-xs-2
