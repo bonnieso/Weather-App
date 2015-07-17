@@ -1,0 +1,27 @@
+<div class="clearfix">
+  <div class="col-md-4" ng-if="title">
+    <h4 class="pull-left report-title">{{title}}</h4>
+  </div>
+</div>
+<br/>
+<div class="position-relative">
+  <div class="a-table-wrapper">
+    <table class="a-table" >
+      <thead>
+        <tr>
+          <th ng-repeat="column in columns">{{column.label}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rows | slice:start:end">
+          <td ng-repeat="column in columns" >
+            <span>{{row[column.label] || '--'}}</span>
+          </td>
+        </tr>
+        <pagination total-items="pager.totalItems" ng-model="pager.currentPage" ng-change="pageChanged()"></pagination>
+        Page: {{pager.currentPage}}
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myTable">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stanley Weather App</title>
+    <link data-require="bootstrap-css@*" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+  </head>
+  <body ng-controller="MainCtrl">
+    <div class="col-md-10 col-sm-9 small-padding">
+      <!-- start of center column -->
+      <div class="panel panel-default small-margin">
+        <div class="panel-heading">
+          <h2>My custom table directive</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <a-table table-data="tableData" columns="columns" title="Step 6"></a-table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.25/angular.js" data-semver="1.2.25"></script>
+    <script data-require="ui-bootstrap@*" data-semver="0.11.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script src="javascripts/script.js"></script>
+  </body>
+</html>
