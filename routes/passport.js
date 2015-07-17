@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('/login', function(req, res) {
-    res.render('login.jade');
+    res.render('layout');
   });
 
   app.post('/login', passport.authenticate('local-login', {
@@ -18,7 +18,7 @@ module.exports = function(app, passport) {
   }));
 
   app.get('/signup', function(req, res) {
-    res.render('signup.jade');
+    res.render('layout');
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
