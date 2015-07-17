@@ -8,18 +8,16 @@
     <link rel="stylesheet" href="stylesheets/style.css" />
   </head>
   <body ng-controller="MainCtrl">
-    <div class="col-md-10 col-sm-9 small-padding">
-      <div class="panel panel-default small-margin">
-        <div class="panel-heading">
-          <h2>Weather App</h2>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-              <div class="col-md-12">
-                <a-table table-data="tableData" columns="columns"></a-table>
-              </div>
-            </div>
-        </div>
+    <div class="container-fluid">
+      <div class="text-center">
+        <h2>Hello Sunshine 2.0</h2>
+      </div>
+      <div class="container">
+        <form action="" class="form-group">
+          <input type="text" class="form-control" placeholder="City" ng-model="city">
+          <input type="text" class="form-control" placeholder="State" ng-model="state">
+          <button ng-submit="searchForecast(state, city)">Search</button>
+        </form>
       </div>
     </div>
     <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.25/angular.js" data-semver="1.2.25"></script>
