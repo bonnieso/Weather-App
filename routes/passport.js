@@ -1,7 +1,13 @@
 module.exports = function(app, passport) {
 
-  app.get('/', isLoggedIn, function(req, res, next) {
-    res.render('index');
+  app.get('/', function(req, res, next) {
+    // res.json(isLoggedIn(req));
+    res.render('layout');
+  });
+
+  app.get('/auth', function(req, res, next) {
+    res.json(isLoggedIn(req));
+    // res.render('layout', isLoggedIn(req));
   });
 
   app.get('/login', function(req, res) {
@@ -12,6 +18,11 @@ module.exports = function(app, passport) {
     successRedirect : '/',
     failureRedirect : '/login'
   }));
+
+  // app.post('/login', passport.authenticate('local-login', {
+  //   successRedirect : '/',
+  //   failureRedirect : '/login'
+  // }));
 
   app.get('/signup', function(req, res) {
     res.render('layout');
@@ -28,9 +39,12 @@ module.exports = function(app, passport) {
   });
 };
 
-function isLoggedIn(req, res, next) {
+
+function isLoggedIn(req) {
+  var auth = {};
   if (req.isAuthenticated()) {
-    return next();
+    auth.isAuth = true;
   }
-  res.redirect('/signup');
+  auth.isAuth = false;
+  return auth;
 }
