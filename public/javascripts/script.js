@@ -1,12 +1,22 @@
 "use strict";
 
-var app = angular.module('myWeather', ['ngRoute'])
-.config(function($stateProvider, $urlRouterProvider) {
-  // $urlRouterProvider.otherwise('/signup')
+var app = angular.module('myWeather', ['ui.router'])
+.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+   $urlRouterProvider.otherwise('/')
   $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: '../views/index.html',
+      controller: 'homeCtrl'
+    })
+    .state('index', {
+      url: '/index',
+      templateUrl: '../views/index.html'
+    })
     .state('signup', {
       url: '/signup',
-      templateUrl: '../views/signup.html'
+      templateUrl: '../views/signup.html',
+      controller: 'signupCtrl'
     })
     .state('login', {
       url: '/login',
@@ -15,7 +25,7 @@ var app = angular.module('myWeather', ['ngRoute'])
     .state('dashboard', {
       url: '/dashboard',
       templateUrl: '../views/index.html',
-      controller: 'DashboardCtrl'
+      controller: 'dashboardCtrl'
     })
 })
 // .config(function($routeProvider) {
@@ -50,7 +60,7 @@ var app = angular.module('myWeather', ['ngRoute'])
 .factory('ForecastService', function($http) {
   return {
     getForecastData: function(state, city) {
-      return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/forecast/q/' + state + '/' + city + '.json')
+      return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/forecast/q/' + state + '/' + city + '.json');
     }
   }
 })
@@ -59,13 +69,36 @@ var app = angular.module('myWeather', ['ngRoute'])
     return arr.slice(start, end);
   }
 })
-.controller("DashboardCtrl", function($scope, ForecastService) {
+.controller("dashboardCtrl", function($scope, ForecastService) {
   $scope.locations = [];
   $scope.searchForecast = function(state, city) {
-    
+
     $scope.cityForecast = ForecastService.getForecastData(state, city);
+<<<<<<< HEAD
 
   }
   
   
+=======
+    $scope.forecast = {};
+  };
 })
+.controller("signupCtrl", function($scope, $state){
+  $scope.toLogin = function() {
+    $state.go('login');
+  };
+>>>>>>> 3a2f0a75cbdb662466d7af6cf56693dcb71b84b7
+})
+.controller("homeCtrl", function($scope, $http, $state) {
+  $http.get('/auth')
+  .then(function(resp){
+    if (resp.isAuth){
+      $state.go("index");
+    }
+    else{
+      $state.go("signup");
+    }
+			}).catch(function(err) {
+				console.log(err);
+			});
+});
