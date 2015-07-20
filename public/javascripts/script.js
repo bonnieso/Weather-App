@@ -30,54 +30,49 @@ var app = angular.module('myWeather', ['ui.router'])
         controller: 'dashboardCtrl'
       })
   })
-  // .factory('WeatherService', function($http){
-  //   return {
-  //     getUrlInfo: function(latitude, longitude) {
-  //       return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/forecast10day/q/' + latitude +',' + longitude + '.json');
-  //     },
-  //     getUrlCond: function(latitude, longitude) {
-  //       return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/conditions/q/' + latitude +',' + longitude + '.json');
-  //     },
-  //     getUrlCity: function(latitude, longitude) {
-  //       return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/geolookup/q/' + latitude +',' + longitude + '.json');
-  //     }
-  //     getUrlHourly: function(latitude, longitude) {
-  //       return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/hourly10day/q/' + latitude +',' + longitude + '.json');
-  //     }
-  //   }
-  // })
   .factory('ForecastService', function ($http) {
     return {
       getForecastData: function (state, city) {
-        return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/forecast/q/' + state + '/' + city + '.json');
+        return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/forecast10day/q/' + state + '/' + city + '.json');
+      },
+      getConditionsData: function (state, city) {
+        return $http.get('http://api.wunderground.com/api/8f8e2900dfd1e401/conditions/q/' + state + '/' + city + '.json');
+      }
+    }
+  })
+  .factory('UserService', function ($http) {
+    return {
+      getUserForecast: function () {
+        return $http.get();
+      },
+      saveUserForecast: function () {
+        return $http.post();
       }
     }
   })
   .controller("indexCtrl", function ($scope, ForecastService) {
     $scope.searchForecast = function (state, city) {
+      ForecastService.getConditionsData(state, city)
+        .success(function(data) {
+          $scope.conditions = {
+            location: data.current_observation.display_location.full,
+            temp: data.current_observation.temp_f,
+            weather: data.current_observation.weather
+          };
+        })
+        .catch(function (err) {
+          console.error(err);
+        })
       ForecastService.getForecastData(state, city)
         .success(function (data) {
-          console.log('forecast: ', data)
-//          $scope.cityForecast = data;
+          $scope.dailyForecast = data.forecast.simpleforecast.forecastday;
+          $scope.search = {};
         })
         .catch(function (err) {
           console.error(err);
         })
     }
   })
-  //.filter('slice', function() {
-  //  return function(arr, start, end) {
-  //    return arr.slice(start, end);
-  //  }
-  //})
-//  .controller("dashboardCtrl", function ($scope, ForecastService) {
-//    $scope.locations = [];
-//    $scope.searchForecast = function (state, city) {
-//
-//      $scope.cityForecast = ForecastService.getForecastData(state, city);
-//      $scope.forecast = {};
-//    };
-//  })
   .controller("homeCtrl", function ($scope, $http, $state) {
     $http.get('/auth')
       .then(function (resp) {
@@ -99,7 +94,6 @@ var app = angular.module('myWeather', ['ui.router'])
         .catch(function (err) {
           console.error(err);
         })
-
     };
   })
   .controller("loginCtrl", function ($scope, $state, $http) {
@@ -111,7 +105,6 @@ var app = angular.module('myWeather', ['ui.router'])
         .catch(function (err) {
           console.error(err);
         })
-
     };
 
   });

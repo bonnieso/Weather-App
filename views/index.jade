@@ -1,10 +1,21 @@
 .row
-  form(ng-submit="searchForecast(state, city)")
-    input.form-control.u-full-width(type='text' placeholder="City", ng-model="city")
-    input.form-control.u-full-width(type='text' placeholder="State", ng-model="state")
+  form(ng-submit="searchForecast(search.state, search.city)")
+    input.form-control.u-full-width(type='text' placeholder="City", ng-model="search.city")
+    input.form-control.u-full-width(type='text' placeholder="State", ng-model="search.state")
     button Search
-.col-md-4(ng-repeat="city in cityForecast")
-  p {{city}}
+.col-md-4
+  .today-forecast.text-center
+    h3 {{conditions.location}}
+    p {{conditions.weather}}
+    p {{conditions.temp}}
+  .daily-forecast(ng-repeat="day in dailyForecast")
+    p {{day.date.monthname_short}} {{day.date.day}}
+    p.forecast-weekday {{day.date.weekday_short}}
+    img.forecast-pic(src="{{day.icon_url}}")
+    p.forecast-info {{day.high.fahrenheit}} F
+    p.forecast-info {{day.low.fahrenheit}} F
+  
+  
 //  .city.row.text-center
 //  .monthDay.row.text-center {{city.simpleforecast.forecastday.date.monthname_short}} {{city.simpleforecast.forecastday.date.day}}, {{city.simpleforecast.forecastday.date.year}}
 //  .cond.row.text-center 

@@ -1,8 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.forecast-weekday {
+  display: inline;
+}
+.forecast-info {
+  display: inline;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.forecast-pic {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 20px;
 }
 
-a {
-  color: #00B7FF;
+.daily-forecast {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 25px;
 }
