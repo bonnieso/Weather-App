@@ -74,12 +74,6 @@ var app = angular.module('myWeather', ['ui.router'])
   $scope.searchForecast = function(state, city) {
 
     $scope.cityForecast = ForecastService.getForecastData(state, city);
-<<<<<<< HEAD
-
-  }
-  
-  
-=======
     $scope.forecast = {};
   };
 })
@@ -87,7 +81,6 @@ var app = angular.module('myWeather', ['ui.router'])
   $scope.toLogin = function() {
     $state.go('login');
   };
->>>>>>> 3a2f0a75cbdb662466d7af6cf56693dcb71b84b7
 })
 .controller("homeCtrl", function($scope, $http, $state) {
   $http.get('/auth')
