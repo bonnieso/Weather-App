@@ -10,8 +10,6 @@ module.exports = function(app, passport) {
     // res.render('layout', isLoggedIn(req));
   });
 
-  app.get('/', isLoggedIn, routes.('index'));
-
   app.get('/login', function(req, res) {
     res.render('layout');
   });
@@ -20,11 +18,6 @@ module.exports = function(app, passport) {
     successRedirect : '/',
     failureRedirect : '/login'
   }));
-
-  // app.post('/login', passport.authenticate('local-login', {
-  //   successRedirect : '/',
-  //   failureRedirect : '/login'
-  // }));
 
   app.get('/signup', function(req, res) {
     res.render('layout');
