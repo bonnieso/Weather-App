@@ -3,14 +3,17 @@
     input.form-control(placeholder="City", ng-model="city")
     input.form-control(placeholder="State", ng-model="state")
     button Search 
-.col-md-4(ng-repeat="location in locations")
+.col-md-4(ng-repeat="city in cityForecast")
   .city.row.text-center
-  .monthDay.row.text-center
-  .cond.row.text-center
+  .monthDay.row.text-center {{city.simpleforecast.forecastday.date.monthname_short}} {{city.simpleforecast.forecastday.date.day}}, {{city.simpleforecast.forecastday.date.year}}
+  .cond.row.text-center 
   .currentTemp.row.text-center
   .forecast.row
-    .row.days(ng-repeat="day in forecast")
-      .day.col-xs-4
-      .icon.col-xs-4
-      .tHigh.col-xs-2
-      .tLow.col-xs-2
+    .row.days(ng-repeat="day in city.simpleforecast.forecastday")
+      .day.col-xs-2 {{day.date.weekday_short}}
+      .icon.col-xs-2 {{day.icon_url}}
+      .tHigh.col-xs-2 {{day.high.fahrenheit}} {{day.high.celsius}}
+      .tLow.col-xs-2 {{day.low.fahrenheit}} {{day.low.celsius}}
+      .humidity.col-xs-4 {{day.avehumidity}}
+      .avewind.col-xs-4 {{day.avewind.mph}} {{day.avewind.kph}}
+      .winddirection.col-xs-4 {{day.avewind.dir}}

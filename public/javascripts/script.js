@@ -1,36 +1,36 @@
 "use strict";
 
 var app = angular.module('myWeather', ['ngRoute'])
-// .config(function($stateProvider, $urlRouterProvider) {
-//   // $urlRouterProvider.otherwise('/signup')
-//   $stateProvider
-//     .state('signup', {
-//       url: '/signup',
-//       templateUrl: '../views/signup.html'
-//     })
-//     .state('login', {
-//       url: '/login',
-//       templateUrl: '../views/login.html'
-//     })
-//     .state('dashboard', {
-//       url: '/dashboard',
-//       templateUrl: '../views/index.html',
-//       controller: 'DashboardCtrl'
-//     })
-// })
-.config(function($routeProvider) {
-  $routeProvider
-    .when('/signup', {
+.config(function($stateProvider, $urlRouterProvider) {
+  // $urlRouterProvider.otherwise('/signup')
+  $stateProvider
+    .state('signup', {
+      url: '/signup',
       templateUrl: '../views/signup.html'
     })
-    .when('/login', {
+    .state('login', {
+      url: '/login',
       templateUrl: '../views/login.html'
     })
-    .when('/dashboard', {
-      templateUrl: '../views/dashboard.html',
+    .state('dashboard', {
+      url: '/dashboard',
+      templateUrl: '../views/index.html',
       controller: 'DashboardCtrl'
     })
 })
+// .config(function($routeProvider) {
+//   $routeProvider
+//     .when('/signup', {
+//       templateUrl: '../views/signup.html'
+//     })
+//     .when('/login', {
+//       templateUrl: '../views/login.html'
+//     })
+//     .when('/dashboard', {
+//       templateUrl: '../views/dashboard.html',
+//       controller: 'DashboardCtrl'
+//     })
+// })
 // .factory('WeatherService', function($http){
 //   return {
 //     getUrlInfo: function(latitude, longitude) {
@@ -64,7 +64,7 @@ var app = angular.module('myWeather', ['ngRoute'])
   $scope.searchForecast = function(state, city) {
     
     $scope.cityForecast = ForecastService.getForecastData(state, city);
-    $scope.forecast = {}
+
   }
   
   
